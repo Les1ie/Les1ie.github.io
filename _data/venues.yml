@@ -1,9 +1,35 @@
-"AJP":
-  url: https://aapt.scitation.org/journal/ajp
+"ICDE":
+  url: https://ieeexplore.ieee.org/xpl/conhome/1800276/all-proceedings
   color: "#00369f"
 
-"PhysRev":
-  url: https://journals.aps.org/
+"KDD":
+  url: https://kdd.org/
+  color: "#00369f"
 
-"Vision":
-  color: "#009f36"
+"ACM MM":
+  url: https://www.acmmm.org/
+  color: "#00369f"
+
+"ESWA":
+  url: https://www.sciencedirect.com/journal/expert-systems-with-applications
+  color: "#00369f"
+
+"Inf. Sci.":
+  url: https://www.sciencedirect.com/journal/information-sciences
+  color: "#00369f"
+
+"CBD":
+  url: https://ieeexplore.ieee.org/xpl/conhome/1000131/all-proceedings
+  color: "#00369f"
+
+"CSCWD":
+  url: https://ieeexplore.ieee.org/xpl/conhome/1000131/all-proceedings
+  color: "#00369f"
+
+"DASFAA":
+  url: https://dasfaa2022.github.io/
+  color: "#00369f"
+
+"arXiv":
+  url: https://arxiv.org/
+  color: "#00369f"
