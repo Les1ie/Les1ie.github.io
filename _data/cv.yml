@@ -1,10 +1,7 @@
 cv:
   name: Zhen Wu
-  label: PhD Student
   email: zwu1024@stu.suda.edu.cn
   location: Nanjing, China
-  image: ""
-  summary: PhD student at Southeast University, working on information diffusion prediction, popularity prediction, paper recommendation, and graph neural networks.
 
   social_networks:
     - network: GitHub
@@ -13,11 +10,6 @@ cv:
       username: twviTdYAAAAJ
     - network: ORCID
       username: 0009-0003-6221-280X
-
-  address:
-    city: Nanjing
-    region: Jiangsu
-    countryCode: CN
 
   sections:
     Education:
@@ -29,7 +21,7 @@ cv:
         start_date: 2024
         end_date: 2028
         highlights:
-          - Advisor: Jinghui Zhang
+          - "Advisor: Jinghui Zhang"
 
       - institution: Soochow University
         location: Suzhou, China
@@ -42,6 +34,7 @@ cv:
       - institution: Jiangxi University of Finance and Economics
         location: Nanchang, China
         url: https://www.jxufe.edu.cn/
+        area: Computer Science
         studyType: Bachelor
         start_date: 2016
         end_date: 2020

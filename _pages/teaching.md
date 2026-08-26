@@ -11,7 +11,9 @@ calendar: true
 This page displays a collection of courses with detailed schedules, materials, and resources. You can organize your courses by years, terms, or topics.
 
 {% comment %}
+
 <!-- TODO: replace with your own Google Calendar id, or remove this line entirely -->
+
 {% include calendar.liquid calendar_id='your-calendar@gmail.com' timezone='Asia/Shanghai' %}
 {% endcomment %}
 
