@@ -4,46 +4,137 @@ layout: page
 {{ content }}
 
 {% if page.collection and page.collection.size > 0 %}
-  {% assign collection = site[page.collection] %}
+  {% assign collection = site[page.collection] | sort: 'started' %}
   {% if collection and collection.size > 0 %}
     {% for item in collection reversed %}
       {% assign current_year = item.started | date: '%Y' %}
       {% if current_year != year %}
-        {% unless forloop.first %}
-          </ul>
-        {% endunless %}
-        <h1 id="y{{item.started | date: "%Y"}}">
-          <a href="{{ current_year | prepend: '/books/' | relative_url }}">{{ current_year }}</a>
-        </h1>
-        <ul>
+        {% unless forloop.first %}</ul>{% endunless %}
+        <h1 id="y{{ item.started | date: '%Y' }}" class="book-year">{{ current_year }}</h1>
+        <ul class="book-list">
           {% assign year = current_year %}
       {% endif %}
 
-      <figure class="cover">
-        <a class="cover-link" href="{{ item.url | relative_url }}">
-          {% if item.cover %}
-            <img alt="{{ item.title }} cover" src="{{ item.cover | prepend: page.covers | relative_url }}" style="height:200px">
-          {% elsif item.olid %}
-            <img alt="{{ item.title }} cover" src="https://covers.openlibrary.org/b/olid/{{ item.olid }}-L.jpg?default=false" style="height:200px">
-          {% elsif item.isbn %}
-            <img alt="{{ item.title }} cover" src="https://covers.openlibrary.org/b/isbn/{{ item.isbn }}-L.jpg?default=false" style="height:200px">
+      {% assign status = item.status | default: 'uncategorized' | downcase | strip %}
+      {% assign known_statuses = 'abandoned,finished,interested,paused,queued,reading,reread' | split: ',' %}
+      {% unless known_statuses contains status %}
+        {% assign status = 'uncategorized' %}
+      {% endunless %}
+
+      <li class="book-item">
+        {% if item.cover %}
+          <img class="book-cover" src="{{ item.cover | prepend: page.covers | relative_url }}" alt="{{ item.title }} cover" loading="lazy">
+        {% elsif item.olid %}
+          <img
+            class="book-cover"
+            src="https://covers.openlibrary.org/b/olid/{{ item.olid }}-L.jpg?default=false"
+            alt="{{ item.title }} cover"
+            loading="lazy"
+          >
+        {% elsif item.isbn %}
+          <img
+            class="book-cover"
+            src="https://covers.openlibrary.org/b/isbn/{{ item.isbn }}-L.jpg?default=false"
+            alt="{{ item.title }} cover"
+            loading="lazy"
+          >
+        {% endif %}
+        <div class="book-info">
+          <span class="book-status {{ status }}">{{ status | upcase }}</span>
+          <a class="book-title" href="{{ item.url | relative_url }}">{{ item.title }}</a>
+          {% if item.author %}
+            <span class="book-author">{{ item.author }}</span>
           {% endif %}
-          {% if item.status %}
-            {% assign statuses = 'abandoned,finished,interested,paused,queued,reading,reread' | split: ',' %}
-            {% assign status = item.status | downcase | strip %}
-            {% if statuses contains status %}
-              <figcaption class="{{ status | downcase }}">{{ status | upcase }}</figcaption>
-            {% else %}
-              <figcaption class="uncategorized">UNCATEGORIZED</figcaption>
-            {% endif %}
-          {% else %}
-            <figcaption class="uncategorized">UNCATEGORIZED</figcaption>
-          {% endif %}
-        </a>
-      </figure>
-      {% if forloop.last %}
-        </ul>
-      {% endif %}
+        </div>
+      </li>
+
+      {% if forloop.last %}</ul>{% endif %}
     {% endfor %}
   {% endif %}
 {% endif %}
+
+<style>
+  ul.book-list {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 1.5rem;
+  }
+  .book-year {
+    font-size: 1.6rem;
+    margin-top: 1.5rem;
+  }
+  .book-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.7rem 0.25rem;
+    border-bottom: 1px solid var(--global-divider-color);
+  }
+  .book-item:last-child {
+    border-bottom: none;
+  }
+  .book-cover {
+    width: 44px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+    flex-shrink: 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  }
+  .book-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
+    min-width: 0;
+  }
+  .book-title {
+    font-weight: 500;
+    color: var(--global-text-color);
+  }
+  .book-title:hover {
+    color: var(--global-theme-color);
+  }
+  .book-author {
+    font-size: 0.88rem;
+    color: var(--global-text-color-light);
+  }
+  .book-status {
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 0.12rem 0.55rem;
+    border-radius: 999px;
+    border: 1px solid;
+    text-transform: uppercase;
+    line-height: 1.5;
+  }
+  .book-status.reading {
+    color: #c98200;
+    border-color: rgba(201, 130, 0, 0.5);
+    background-color: rgba(201, 130, 0, 0.12);
+  }
+  .book-status.finished {
+    color: #2f9e6e;
+    border-color: rgba(47, 158, 110, 0.5);
+    background-color: rgba(47, 158, 110, 0.12);
+  }
+  .book-status.reread {
+    color: #4a8fd9;
+    border-color: rgba(74, 143, 217, 0.5);
+    background-color: rgba(74, 143, 217, 0.12);
+  }
+  .book-status.abandoned {
+    color: #cf5454;
+    border-color: rgba(207, 84, 84, 0.5);
+    background-color: rgba(207, 84, 84, 0.12);
+  }
+  .book-status.interested,
+  .book-status.paused,
+  .book-status.queued,
+  .book-status.uncategorized {
+    color: var(--global-text-color-light);
+    border-color: var(--global-divider-color);
+    background-color: transparent;
+  }
+</style>
