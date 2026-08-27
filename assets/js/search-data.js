@@ -37,13 +37,6 @@ ninja.data = [{
               handler: () => {
                 window.location.href = "/books/";
               },
-            },{id: "dropdown-blog",
-              title: "blog",
-              description: "",
-              section: "Dropdown",
-              handler: () => {
-                window.location.href = "/blog/";
-              },
             },{id: "books-智能体-理论基础与应用实践",
           title: '智能体：理论基础与应用实践',
           description: "",
