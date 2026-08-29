@@ -24,24 +24,20 @@ layout: page
       <li class="book-item">
         {% if item.cover %}
           <img class="book-cover" src="{{ item.cover | prepend: page.covers | relative_url }}" alt="{{ item.title }} cover" loading="lazy">
-        {% elsif item.olid %}
-          <img
-            class="book-cover"
-            src="https://covers.openlibrary.org/b/olid/{{ item.olid }}-L.jpg?default=false"
-            alt="{{ item.title }} cover"
-            loading="lazy"
-          >
-        {% elsif item.isbn %}
-          <img
-            class="book-cover"
-            src="https://covers.openlibrary.org/b/isbn/{{ item.isbn }}-L.jpg?default=false"
-            alt="{{ item.title }} cover"
-            loading="lazy"
-          >
         {% endif %}
         <div class="book-info">
           <span class="book-status {{ status }}">{{ status | upcase }}</span>
-          <a class="book-title" href="{{ item.url | relative_url }}">{{ item.title }}</a>
+          <span class="book-title-row">
+            <a class="book-title" href="{{ item.url | relative_url }}">{{ item.title }}</a>
+            {% if item.link %}
+              <a class="book-link" href="{{ item.link }}" target="_blank" rel="noopener noreferrer">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                {% if item.link_label -%}
+                  <span class="book-link-label">{{ item.link_label }}</span>
+                {%- endif %}
+              </a>
+            {% endif %}
+          </span>
           {% if item.author %}
             <span class="book-author">{{ item.author }}</span>
           {% endif %}
@@ -94,6 +90,26 @@ layout: page
   }
   .book-title:hover {
     color: var(--global-theme-color);
+  }
+  .book-title-row {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+  .book-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.72rem;
+    color: var(--global-text-color-light);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .book-link:hover {
+    color: var(--global-theme-color);
+  }
+  .book-link-label {
+    font-weight: 500;
   }
   .book-author {
     font-size: 0.88rem;
