@@ -2,9 +2,7 @@ name: Update Google Scholar Citations
 
 on:
   schedule:
-    - cron: "0 0 * * 1" # Monday
-    - cron: "0 0 * * 3" # Wednesday
-    - cron: "0 0 * * 5" # Friday
+    - cron: "0 0 * * 1" # Every Monday at 00:00 UTC (Monday 08:00 Beijing time)
   workflow_dispatch:
 
 jobs:
@@ -93,9 +91,16 @@ jobs:
 
       - name: Commit and push if changed
         run: |
+          if [ ! -f _data/citations.yml ]; then
+            echo "⚠️ _data/citations.yml was not generated (citation fetch failed or returned no data). Skipping commit."
+            echo "⚠️ _data/citations.yml is missing — nothing to commit. Check the 'Run citation update script' step above." >> $GITHUB_STEP_SUMMARY
+            exit 0
+          fi
           git add _data/citations.yml
-          git diff --staged --quiet || (
+          if git diff --staged --quiet; then
+            echo "ℹ️ No changes in citations.yml. Nothing to commit."
+          else
             echo "📤 Committing and pushing changes..."
             git commit -m "Update Google Scholar citations"
             git push
-          )
+          fi

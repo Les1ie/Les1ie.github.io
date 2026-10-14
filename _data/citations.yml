@@ -1,0 +1,39 @@
+metadata:
+  last_updated: '2026-10-14'
+papers:
+  twviTdYAAAAJ:2osOgNQ5qMEC:
+    citations: 17
+    title: Deep Popularity Prediction in Multi-Source Cascade with HERI-GCN
+    year: '2022'
+  twviTdYAAAAJ:9yKSN-GCB0IC:
+    citations: 4
+    title: 'Wb-MSF: A Large-scale Multi-source Information Diffusion Dataset for Social Information Diffusion Prediction'
+    year: '2022'
+  twviTdYAAAAJ:KlAtU1dfN6UC:
+    citations: 1
+    title: Information Diffusion Prediction via Exploiting Cascade Relationship Diversity
+    year: '2023'
+  twviTdYAAAAJ:Se3iqnhoufwC:
+    citations: 12
+    title: 'MARec: A multi-attention aware paper recommendation method'
+    year: '2023'
+  twviTdYAAAAJ:ULOm3_A8WrAC:
+    citations: 14
+    title: 'SOAP: Enhancing Spatio-Temporal Relation and Motion Information Capturing for Few-Shot Action Recognition'
+    year: '2024'
+  twviTdYAAAAJ:WF5omc3nYNoC:
+    citations: 5
+    title: Toward paper recommendation by jointly exploiting diversity and dynamics in heterogeneous information networks
+    year: '2022'
+  twviTdYAAAAJ:Zph67rFs4hoC:
+    citations: 10
+    title: A Deep Prediction Framework for Multi-Source Information via Heterogeneous GNN
+    year: '2024'
+  twviTdYAAAAJ:kNdYIx-mwKoC:
+    citations: 0
+    title: Rich Information Driven Popularity Prediction on Weibo
+    year: '2023'
+  twviTdYAAAAJ:roLk4NBRz8UC:
+    citations: 23
+    title: 'CasTformer: A novel cascade transformer towards predicting information diffusion'
+    year: '2023'
